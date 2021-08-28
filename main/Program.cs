@@ -87,26 +87,6 @@ namespace main
                 Console.WriteLine(separatorLine);
             
             }
-/*             foreach (var item in collection)
-            {
-                var contentLine = ConsoleTableCreator.CreateContentLine(item.Name.ToString(), item.TypeOfAction.ToString(), item.Quantity.ToString(), item.Price.ToString());
-                ConsoleTableCreator.PrintLine(contentLine);
-/*                 if (item.TradeIdentifier.Contains(readCode))
-                {
-                    var contentLine = ConsoleTableCreator.CreateContentLine(item.Name.ToString(), item.TypeOfAction.ToString(), item.Quantity.ToString(), item.Price.ToString());
-                    ConsoleTableCreator.PrintLine(contentLine);
-                    Console.WriteLine(separatorLine);
-
-                    //Console.WriteLine(item.ToString());
-/*                     var b = collection.Where(c => c.TradeIdentifier.Contains("NOKIA"));
-                    foreach (var item2 in b)
-                    {
-                        Console.WriteLine(item2.ToString());
-                    }
-*/
-                //} 
-                
-            //}
            }
 
     }
