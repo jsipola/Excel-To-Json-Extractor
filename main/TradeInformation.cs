@@ -28,7 +28,7 @@ namespace main
             StockExchange = stockExchange;
             DateOfAction = dateOfAction;
             PaymentDate = paymentDate;
-            Quantity = quantity ?? "NULL";
+            Quantity = (double)(quantity ?? 0.0);
             Price = price;
             Currency = currency;
             CurrencyRate = currencyRate;
@@ -44,7 +44,7 @@ namespace main
         public string StockExchange { get; }
         public string DateOfAction { get; }
         public string PaymentDate { get; }
-        public object Quantity { get; }
+        public double Quantity { get; }
         public object Price { get; }
         public double Currency { get; }
         public string CurrencyRate { get; }
@@ -55,7 +55,6 @@ namespace main
         public override string ToString()
         {
             return String.Format("| {0,-40} | {1,-10} | {2,10} | {3,10} |", Name.ToString(), TypeOfAction.ToString(), Quantity.ToString(), Price.ToString());
-            //return Name.ToString() + " " + TypeOfAction.ToString() + " " + Quantity.ToString() + " " + Price.ToString();
         }
     }
 }
