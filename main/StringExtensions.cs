@@ -6,7 +6,7 @@ namespace main
         {
             if (str.Length > length)
             {
-                return str.Substring(0, length);
+                return str.Substring(0, length) + "...";
             }
             else
             {

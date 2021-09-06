@@ -38,11 +38,7 @@ namespace main
                 {
                     if (line.TypeOfAction.Contains("Myynti") || line.TypeOfAction.Contains("Osto"))
                     {
-                        var contentLine = ConsoleTableCreator.CreateContentLine(line.Name.TruncateLength(40),
-                                                                                line.TypeOfAction,
-                                                                                line.Quantity.ToString(),
-                                                                                line.Price.ToString());
-                        ConsoleTableCreator.PrintLine(contentLine);
+                        CreateContent(line);
                     }
                 }
                 Console.WriteLine(separatorLine);
@@ -51,8 +47,8 @@ namespace main
 
         private void CreateContent(TradeInformation info)
         {
-            var contentLine = ConsoleTableCreator.CreateContentLine(info.Name.ToString(),
-                                                                    info.TypeOfAction.ToString(),
+            var contentLine = ConsoleTableCreator.CreateContentLine(info.Name,
+                                                                    info.TypeOfAction,
                                                                     info.Quantity.ToString(),
                                                                     info.Price.ToString());
             ConsoleTableCreator.PrintLine(contentLine);
