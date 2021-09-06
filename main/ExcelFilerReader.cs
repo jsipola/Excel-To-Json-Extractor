@@ -11,24 +11,17 @@ namespace main
         public ExcelFileReader()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var firstFile = Directory.GetFiles(currentDirectory + "/data/").FirstOrDefault();
+            var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
 
-            Console.WriteLine(firstFile);
+            Console.WriteLine(files.FirstOrDefault());
 
-            var collection = ReadExcelFileContent(firstFile);
+            var collection = files.SelectMany(firstFile => ReadExcelFileContent(firstFile));
          
             Console.WriteLine("Number of items : " + collection.Count());
             var headerLine = ConsoleTableCreator.CreateHeaderLine();
             var separatorLine = ConsoleTableCreator.CreateSeparator(headerLine.Count());
-            var codes = collection.Select(b => b.TradeIdentifier).Where(a => a != string.Empty).Distinct();
             collection = collection.OrderBy(a => a.Name).ToList();
-/*             foreach(var itemCode in codes)
-            {
-                Console.WriteLine(itemCode);
-            } */
 
-            //Console.WriteLine("\nSelect stock identifier for more information:");
-            //var readCode = Console.ReadLine().ToUpper();
             Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine("\n");
@@ -45,9 +38,8 @@ namespace main
                 {
                     if (line.TypeOfAction.Contains("Myynti") || line.TypeOfAction.Contains("Osto"))
                     {
-                        /* TODO string truncation to fit column width */
-                        var contentLine = ConsoleTableCreator.CreateContentLine(line.Name.ToString(),
-                                                                                line.TypeOfAction.ToString(),
+                        var contentLine = ConsoleTableCreator.CreateContentLine(line.Name.TruncateLength(40),
+                                                                                line.TypeOfAction,
                                                                                 line.Quantity.ToString(),
                                                                                 line.Price.ToString());
                         ConsoleTableCreator.PrintLine(contentLine);
