@@ -2,21 +2,13 @@ using System;
 
 namespace main
 {
-    class ConsoleTableCreator
+    static class ConsoleTableCreator
     {
-        private const string TableFormat = "| {0,-40} | {1,-20} | {2,10} | {3,10} |";
-
         public static string ColumnFormat = "|";
 
         private static int _numberOfColumns;
 
-        public static int NumberOfColumns
-        {
-            get => _numberOfColumns;
-            set => _numberOfColumns = value;
-        }
-
-        public ConsoleTableCreator()
+        public static void Init()
         {
             _numberOfColumns = 0;
         }

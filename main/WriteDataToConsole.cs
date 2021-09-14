@@ -13,11 +13,7 @@ namespace main
         
         public void CreateConsoleTable(IList<TradeInformation> trades)
         {
-            var collection = trades;
-
-            var consoleTable = new ConsoleTableCreator();
-
-
+            ConsoleTableCreator.Init();
             ConsoleTableCreator.AddTableColumn(-40);
             ConsoleTableCreator.AddTableColumn(-20);
             ConsoleTableCreator.AddTableColumn(10);
@@ -35,7 +31,7 @@ namespace main
             Console.WriteLine(headerLine);
             Console.WriteLine(separatorLine);
 
-            var groupedList = collection.GroupBy(a => a.Name, a => a);
+            var groupedList = trades.GroupBy(trade => trade.Name, item => item);
             foreach (var item in groupedList)
             {
                 var contentCount = 0;

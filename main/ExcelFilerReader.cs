@@ -11,25 +11,22 @@ namespace main
 
         private IList<TradeInformation> _collectionOfTrades;
 
-        public IList<TradeInformation> CollectionOfTrades
+        public IList<TradeInformation> GetTradeCollection()
         {
-            get => _collectionOfTrades;
-            set => _collectionOfTrades = value; 
+            return _collectionOfTrades;
+        }
+
+        private void SetTradeCollection(IList<TradeInformation> trades)
+        {
+            _collectionOfTrades = trades;
         }
 
         public ExcelFileReader()
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
-            
-            var collection = files.SelectMany(currentFile => ReadExcelFileContent(currentFile));
-         
-            Console.WriteLine("Number of items : " + collection.Count());
-            _collectionOfTrades = new List<TradeInformation>();
             Run();
         }
 
-        public void Run()
+        private void Run()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
@@ -38,13 +35,8 @@ namespace main
          
             _collectionOfTrades = collection.OrderBy(a => a.Name).ToList();
         }
-
-        public IList<TradeInformation> GetTradeCollection()
-        {
-            return _collectionOfTrades;
-        }
         
-        public IEnumerable<TradeInformation> ReadExcelFileContent(string fileName)
+        private IEnumerable<TradeInformation> ReadExcelFileContent(string fileName)
         {
             var collection = new List<TradeInformation>();
             
