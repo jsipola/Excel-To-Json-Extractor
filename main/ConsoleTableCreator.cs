@@ -28,18 +28,14 @@ namespace main
         }
 
         public static string CreateHeaderLine(params string[] headers){
-            return string.Format(TableFormat, headers);
+            return string.Format(ColumnFormat, headers);
         }
 
         public static string CreateSeparator(int lineLength){
             return new String('-', lineLength);
         }
 
-        public static string CreateContentLine(string arg0, string arg1, string arg2, string arg3){
-            return string.Format(TableFormat, arg0.TruncateLength(36), arg1, arg2, arg3);
-        }
-
-        public static string CreateContentLineAlt(params string[] args){
+        public static string CreateContentLine(params string[] args){
             return string.Format(ColumnFormat, args);
         }
 

@@ -17,13 +17,14 @@ namespace main
 
             var consoleTable = new ConsoleTableCreator();
 
-            var headerLine = ConsoleTableCreator.CreateHeaderLine("Stock Name", "Action", "Amount", "Price");
-            var separatorLine = ConsoleTableCreator.CreateSeparator(headerLine.Count());
 
             ConsoleTableCreator.AddTableColumn(-40);
             ConsoleTableCreator.AddTableColumn(-20);
             ConsoleTableCreator.AddTableColumn(10);
             ConsoleTableCreator.AddTableColumn(10);
+            
+            var headerLine = ConsoleTableCreator.CreateHeaderLine("Stock Name", "Action", "Amount", "Price");
+            var separatorLine = ConsoleTableCreator.CreateSeparator(headerLine.Count());
 
             Console.WriteLine("\n");
             Console.WriteLine("\n");
@@ -55,7 +56,7 @@ namespace main
         
         private void CreateContent(TradeInformation info)
         {
-            var contentLine = ConsoleTableCreator.CreateContentLineAlt(info.Name.TruncateLength(35),
+            var contentLine = ConsoleTableCreator.CreateContentLine(info.Name.TruncateLength(35),
                                                                     info.TypeOfAction,
                                                                     info.Quantity.ToString(),
                                                                     info.Price.ToString());
