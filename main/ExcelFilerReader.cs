@@ -8,52 +8,42 @@ namespace main
 {
     class ExcelFileReader
     {
+
+        private IList<TradeInformation> _collectionOfTrades;
+
+        public IList<TradeInformation> CollectionOfTrades
+        {
+            get => _collectionOfTrades;
+            set => _collectionOfTrades = value; 
+        }
+
         public ExcelFileReader()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
-
-            Console.WriteLine(files.FirstOrDefault());
-
-            var collection = files.SelectMany(firstFile => ReadExcelFileContent(firstFile));
+            
+            var collection = files.SelectMany(currentFile => ReadExcelFileContent(currentFile));
          
             Console.WriteLine("Number of items : " + collection.Count());
-            var headerLine = ConsoleTableCreator.CreateHeaderLine();
-            var separatorLine = ConsoleTableCreator.CreateSeparator(headerLine.Count());
-            collection = collection.OrderBy(a => a.Name).ToList();
-
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine(headerLine);
-            Console.WriteLine(separatorLine);
-
-            var groupedList = collection.GroupBy(a => a.Name, a => a);
-            foreach (var item in groupedList)
-            {
-                foreach (var line in item)
-                {
-                    if (line.TypeOfAction.Contains("Myynti") || line.TypeOfAction.Contains("Osto"))
-                    {
-                        CreateContent(line);
-                    }
-                }
-                Console.WriteLine(separatorLine);
-            }
+            _collectionOfTrades = new List<TradeInformation>();
+            Run();
         }
 
-        private void CreateContent(TradeInformation info)
+        public void Run()
         {
-            var contentLine = ConsoleTableCreator.CreateContentLine(info.Name,
-                                                                    info.TypeOfAction,
-                                                                    info.Quantity.ToString(),
-                                                                    info.Price.ToString());
-            ConsoleTableCreator.PrintLine(contentLine);
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
+            
+            var collection = files.SelectMany(currentFile => ReadExcelFileContent(currentFile));
+         
+            _collectionOfTrades = collection.OrderBy(a => a.Name).ToList();
         }
 
+        public IList<TradeInformation> GetTradeCollection()
+        {
+            return _collectionOfTrades;
+        }
+        
         public IEnumerable<TradeInformation> ReadExcelFileContent(string fileName)
         {
             var collection = new List<TradeInformation>();
@@ -82,6 +72,7 @@ namespace main
                                                             marketValue: reader.GetValue(12),
                                                             commision: reader.GetValue(13),
                                                             totalTransactionCost: reader.GetValue(14));
+
                             collection.Add(info);
                         }
                     } while (reader.NextResult());

@@ -6,29 +6,29 @@ namespace main
     {
         private const string TableFormat = "| {0,-40} | {1,-20} | {2,10} | {3,10} |";
 
-        private string ColumnFormat = "| ";
+        public static string ColumnFormat = "|";
 
-        private int _numberOfColumns;
+        private static int _numberOfColumns;
 
-        public int NumberOfColumns
+        public static int NumberOfColumns
         {
             get => _numberOfColumns;
             set => _numberOfColumns = value;
         }
 
-        public void AddTableColumnWidths(int width = -30)
+        public ConsoleTableCreator()
         {
-            ColumnFormat += string.Format("{{0}, {1} |}", NumberOfColumns, width);
-            NumberOfColumns =+ 1;
+            _numberOfColumns = 0;
         }
 
-        public void AddEndColumnPostFix()
+        public static void AddTableColumn(int width = -30)
         {
-            ColumnFormat += "|";
+            ColumnFormat += $" {{{_numberOfColumns},{width}}} |";
+            _numberOfColumns++;
         }
 
-        public static string CreateHeaderLine(){
-            return string.Format(TableFormat, "Stock Name", "Action", "Amount", "Price");
+        public static string CreateHeaderLine(params string[] headers){
+            return string.Format(TableFormat, headers);
         }
 
         public static string CreateSeparator(int lineLength){
@@ -37,6 +37,10 @@ namespace main
 
         public static string CreateContentLine(string arg0, string arg1, string arg2, string arg3){
             return string.Format(TableFormat, arg0.TruncateLength(36), arg1, arg2, arg3);
+        }
+
+        public static string CreateContentLineAlt(params string[] args){
+            return string.Format(ColumnFormat, args);
         }
 
         public static void PrintLine(string line){
