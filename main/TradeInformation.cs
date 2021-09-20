@@ -20,6 +20,7 @@ namespace main
                                 object commision,
                                 object totalTransactionCost)
         {
+            /* TODO: Add whitespace trimming */
             RecordNumber = recordNumber;
             TypeOfAction = typeOfAction;
             Name = name ?? "NULL";
