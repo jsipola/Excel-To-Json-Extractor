@@ -4,21 +4,31 @@ namespace main
 {
     static class ConsoleTableCreator
     {
-        private const string TableFormat = "| {0,-40} | {1,-20} | {2,10} | {3,10} |";
+        public static string ColumnFormat = "|";
 
-        /* TODO CREATE HEADER LINE*/
-        public static string CreateHeaderLine(){
-            return string.Format(TableFormat, "Stock Name", "Action", "Amount", "Price");
+        private static int _numberOfColumns;
+
+        public static void Init()
+        {
+            _numberOfColumns = 0;
         }
 
-        /* TODO CREATE SEPARATOR LINE */
+        public static void AddTableColumn(int width = -30)
+        {
+            ColumnFormat += $" {{{_numberOfColumns},{width}}} |";
+            _numberOfColumns++;
+        }
+
+        public static string CreateHeaderLine(params string[] headers){
+            return string.Format(ColumnFormat, headers);
+        }
+
         public static string CreateSeparator(int lineLength){
             return new String('-', lineLength);
         }
 
-        /* CREATE CONTENT LINE */
-        public static string CreateContentLine(string arg0, string arg1, string arg2, string arg3){
-            return string.Format(TableFormat, arg0, arg1, arg2, arg3);
+        public static string CreateContentLine(params string[] args){
+            return string.Format(ColumnFormat, args);
         }
 
         public static void PrintLine(string line){
