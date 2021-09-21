@@ -13,26 +13,23 @@ namespace main
                                 string dateOfAction,
                                 string paymentDate,
                                 object quantity,
-                                object price,
-                                double currency,
-                                string currencyRate,
+                                double rate,
+                                string currency,
                                 object marketValue,
                                 object commision,
                                 object totalTransactionCost)
         {
-            /* TODO: Add whitespace trimming */
-            RecordNumber = recordNumber;
-            TypeOfAction = typeOfAction;
-            Name = name ?? "NULL";
+            RecordNumber = recordNumber.Trim();
+            TypeOfAction = typeOfAction.Trim();
+            Name = name.Trim() ?? "NULL";
             IsinCode = isinCode;
-            TradeIdentifier = tradeIdentifier ?? "NULL";
+            TradeIdentifier = tradeIdentifier.Trim() ?? "NULL";
             StockExchange = stockExchange;
             DateOfAction = dateOfAction;
             PaymentDate = paymentDate;
             Quantity = (double)(quantity ?? 0.0);
-            Price = price;
-            Currency = currency;
-            CurrencyRate = currencyRate;
+            Rate = rate;
+            Currency = currency.Trim();
             MarketValue = marketValue;
             TotalTransactionCost = totalTransactionCost ?? "NULL";
         }
@@ -46,16 +43,10 @@ namespace main
         public string DateOfAction { get; }
         public string PaymentDate { get; }
         public double Quantity { get; }
-        public object Price { get; }
-        public double Currency { get; }
-        public string CurrencyRate { get; }
+        public double Rate { get; }
+        public string Currency { get; }
         public object MarketValue { get; }
         public object Commision { get; }
         public object TotalTransactionCost { get; }
-
-        public override string ToString()
-        {
-            return String.Format("| {0,-40} | {1,-10} | {2,10} | {3,10} |", Name.ToString(), TypeOfAction.ToString(), Quantity.ToString(), Price.ToString());
-        }
     }
 }

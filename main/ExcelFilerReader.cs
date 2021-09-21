@@ -58,9 +58,8 @@ namespace main
                                                             dateOfAction: reader.GetString(6),
                                                             paymentDate: reader.GetString(7),
                                                             quantity: reader.GetValue(8),
-                                                            price: reader.GetValue(9),
-                                                            currency: reader.GetDouble(9),
-                                                            currencyRate: reader.GetString(10),
+                                                            rate: reader.GetDouble(9),
+                                                            currency: reader.GetString(10),
                                                             marketValue: reader.GetValue(12),
                                                             commision: reader.GetValue(13),
                                                             totalTransactionCost: reader.GetValue(14));
