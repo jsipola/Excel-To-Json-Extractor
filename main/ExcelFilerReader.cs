@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +22,8 @@ namespace main
 
         public ExcelFileReader()
         {
+            // Required for ExcelReaderFactory
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             Run();
         }
 
@@ -60,6 +61,7 @@ namespace main
                                                             quantity: reader.GetValue(8),
                                                             rate: reader.GetDouble(9),
                                                             currency: reader.GetString(10),
+                                                            exchangeCurrency: reader.GetDouble(11),
                                                             marketValue: reader.GetValue(12),
                                                             commision: reader.GetValue(13),
                                                             totalTransactionCost: reader.GetValue(14));

@@ -1,5 +1,3 @@
-using System;
-
 namespace main
 {
     class TradeInformation
@@ -15,6 +13,7 @@ namespace main
                                 object quantity,
                                 double rate,
                                 string currency,
+                                double exchangeCurrency,
                                 object marketValue,
                                 object commision,
                                 object totalTransactionCost)
@@ -25,10 +24,11 @@ namespace main
             IsinCode = isinCode;
             TradeIdentifier = tradeIdentifier.Trim() ?? "NULL";
             StockExchange = stockExchange;
-            DateOfAction = dateOfAction;
-            PaymentDate = paymentDate;
+            DateOfAction = dateOfAction.Trim();
+            PaymentDate = paymentDate.Trim();
             Quantity = (double)(quantity ?? 0.0);
             Rate = rate;
+            ExchangeCurrency = exchangeCurrency;
             Currency = currency.Trim();
             MarketValue = marketValue;
             TotalTransactionCost = totalTransactionCost ?? "NULL";
@@ -44,6 +44,7 @@ namespace main
         public string PaymentDate { get; }
         public double Quantity { get; }
         public double Rate { get; }
+        public double ExchangeCurrency { get; }
         public string Currency { get; }
         public object MarketValue { get; }
         public object Commision { get; }

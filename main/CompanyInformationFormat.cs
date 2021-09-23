@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace main
 {
-    /* Create sub class for dividend*/
     class CompanyInformationFormat
     {
         public int Id { get; set; }
@@ -23,13 +22,13 @@ namespace main
         
         public IList<TradeAction> Sells { get; set; }
 
-        public IList<TradeAction> Dividends { get; set; }
+        public IList<TradeActionDividend> Dividends { get; set; }
 
         public CompanyInformationFormat()
         {
             Buys = new List<TradeAction>();
             Sells = new List<TradeAction>();
-            Dividends = new List<TradeAction>();
+            Dividends = new List<TradeActionDividend>();
             TotalBuyAmount = 0;
             TotalSellAmount = 0;
             TotalDividendAmount = 0;
@@ -47,7 +46,7 @@ namespace main
             Sells.Add(trade);
         }
         
-        internal void AddDividend(TradeAction trade)
+        internal void AddDividend(TradeActionDividend trade)
         {
             Dividends.Add(trade);
         }

@@ -8,7 +8,6 @@ namespace main
     {
         public WriteDataToConsole()
         {
-            
         }
         
         public void CreateConsoleTable(IList<TradeInformation> trades)
