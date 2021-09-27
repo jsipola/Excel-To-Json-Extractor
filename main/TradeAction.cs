@@ -1,5 +1,3 @@
-using System;
-
 namespace main
 {
     public class TradeAction : TradeActionBase
