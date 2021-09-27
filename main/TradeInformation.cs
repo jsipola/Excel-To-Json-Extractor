@@ -31,7 +31,7 @@ namespace main
             ExchangeCurrency = exchangeCurrency;
             Currency = currency.Trim();
             MarketValue = marketValue;
-            TotalTransactionCost = totalTransactionCost ?? "NULL";
+            TotalTransactionCost = totalTransactionCost ?? 0;
         }
 
         public string RecordNumber { get; }

@@ -8,8 +8,7 @@ namespace main
 
         public double Quantity { get; set; }
 
-        /* Change to string ? */
-        public DateTime DateOfAction { get; set; }
+        public string DateOfAction { get; set; }
         
         public float Rate { get; set; }
     }
