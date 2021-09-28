@@ -1,6 +1,6 @@
 using System;
 
-namespace main
+namespace ExcelToJsonExtractor
 {
     static class ConsoleTableCreator
     {
