@@ -95,6 +95,7 @@ StyleCopReport.xml
 
 # ignore test data
 *.xls
+*.json
 
 # Chutzpah Test files
 _Chutzpah*

@@ -8,7 +8,6 @@ namespace main
     {
         public WriteDataToConsole()
         {
-            
         }
         
         public void CreateConsoleTable(IList<TradeInformation> trades)
@@ -55,7 +54,7 @@ namespace main
             var contentLine = ConsoleTableCreator.CreateContentLine(info.Name.TruncateLength(35),
                                                                     info.TypeOfAction,
                                                                     info.Quantity.ToString(),
-                                                                    info.Price.ToString());
+                                                                    info.Rate.ToString());
             ConsoleTableCreator.PrintLine(contentLine);
         }
     }
