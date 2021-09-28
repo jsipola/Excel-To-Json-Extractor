@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace main
+namespace CompanyInformationModels
 {
     class CompanyInformationFormat
     {
@@ -18,16 +18,16 @@ namespace main
 
         public string Currency { get; set; }
 
-        public IList<TradeAction> Buys { get; set; }
+        public IList<TradeActionEvent> Buys { get; set; }
         
-        public IList<TradeAction> Sells { get; set; }
+        public IList<TradeActionEvent> Sells { get; set; }
 
         public IList<TradeActionDividend> Dividends { get; set; }
 
         public CompanyInformationFormat()
         {
-            Buys = new List<TradeAction>();
-            Sells = new List<TradeAction>();
+            Buys = new List<TradeActionEvent>();
+            Sells = new List<TradeActionEvent>();
             Dividends = new List<TradeActionDividend>();
             TotalBuyAmount = 0;
             TotalSellAmount = 0;
@@ -36,12 +36,12 @@ namespace main
             Currency = "EUR";
         }
 
-        internal void AddBuy(TradeAction trade)
+        internal void AddBuy(TradeActionEvent trade)
         {
             Buys.Add(trade);
         }
 
-        internal void AddSell(TradeAction trade)
+        internal void AddSell(TradeActionEvent trade)
         {
             Sells.Add(trade);
         }

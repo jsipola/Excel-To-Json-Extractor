@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
+using CompanyInformationModels;
 
 namespace main
 {
@@ -44,21 +45,21 @@ namespace main
                     companyTradeData.Currency = line.Currency;
                     if (line.TypeOfAction.Contains("Myynti"))
                     {
-                        TradeAction trade = CreateTradeAction(line);
+                        TradeActionEvent trade = CreateTradeAction(line);
                         companyTradeData.CurrentQuantity -= trade.Quantity;
                         companyTradeData.AddSell(trade);
                         companyTradeData.TotalSellAmount += trade.TotalTransactionAmount;
                     }
                     if  (line.TypeOfAction.Contains("Osto") || line.TypeOfAction.Contains("Directed Issue")){
 
-                        TradeAction trade = CreateTradeAction(line);
+                        TradeActionEvent trade = CreateTradeAction(line);
                         companyTradeData.CurrentQuantity += trade.Quantity; 
                         companyTradeData.AddBuy(trade);
                         companyTradeData.TotalBuyAmount += trade.TotalTransactionAmount;
                     }
                     if  (line.TypeOfAction.Contains("Capitalization Issue")){
 
-                        TradeAction trade = CreateTradeAction(line);
+                        TradeActionEvent trade = CreateTradeAction(line);
                         trade.TypeOfAction = "A Capitalization Issue";
                         companyTradeData.CurrentQuantity += line.Quantity; 
                         companyTradeData.AddBuy(trade);
@@ -82,9 +83,9 @@ namespace main
             }
         }
 
-        private static TradeAction CreateTradeAction(TradeInformation line)
+        private static TradeActionEvent CreateTradeAction(TradeInformation line)
         {
-            return new TradeAction
+            return new TradeActionEvent
             {
                 RecordNumber = line.RecordNumber,
                 DateOfAction = line.DateOfAction,

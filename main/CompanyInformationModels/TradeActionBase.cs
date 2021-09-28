@@ -1,4 +1,4 @@
-namespace main
+namespace CompanyInformationModels
 {
     public class TradeActionBase
     {

@@ -1,6 +1,6 @@
-namespace main
+namespace CompanyInformationModels
 {
-    public class TradeAction : TradeActionBase
+    public class TradeActionEvent : TradeActionBase
     {
         public string RecordNumber { get; set; }
 
