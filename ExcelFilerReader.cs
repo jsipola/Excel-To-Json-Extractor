@@ -10,6 +10,7 @@ namespace ExcelToJsonExtractor
     {
 
         private static string xlsDataFolder => "/data/";
+        
         private IList<TradeInformation> _collectionOfTrades;
 
         public string ExcelFile { get; set;}
