@@ -30,7 +30,7 @@ namespace ExcelToJsonExtractor
             Console.WriteLine(headerLine);
             Console.WriteLine(separatorLine);
 
-            /* TODO: inprove this to order the trades alphabetically */
+            /* TODO: improve this to order the trades alphabetically */
             var groupedList = trades.OrderBy(info => info.Name).GroupBy(trade => trade.Name, item => item);
             foreach (var item in groupedList)
             {
