@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,35 +9,54 @@ namespace ExcelToJsonExtractor
     class ExcelFileReader
     {
 
+        private static string xlsDataFolder => "/data/";
+        
         private IList<TradeInformation> _collectionOfTrades;
 
-        public IList<TradeInformation> GetTradeCollection()
-        {
-            return _collectionOfTrades;
-        }
-
-        private void SetTradeCollection(IList<TradeInformation> trades)
-        {
-            _collectionOfTrades = trades;
-        }
+        public string ExcelFile { get; set;}
 
         public ExcelFileReader()
         {
             // Required for ExcelReaderFactory
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            Run();
+            _collectionOfTrades = new List<TradeInformation>();
+            ExcelFile = string.Empty;
         }
 
-        private void Run()
+        public void Run()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var files = Directory.GetFiles(currentDirectory + "/data/").Where(filename => filename.EndsWith(".xls"));
-            
-            var collection = files.SelectMany(currentFile => ReadExcelFileContent(currentFile));
+            var collection = Enumerable.Empty<TradeInformation>();
+            if (ExcelFile.Equals(string.Empty) || !File.Exists(ExcelFile))
+            {
+                Console.WriteLine("No specified file found!");
+                Console.WriteLine("Searching under ´{0}´", xlsDataFolder);
+                var files = Directory.GetFiles(currentDirectory + xlsDataFolder).Where(filename => filename.EndsWith(".xls"));
+                
+                if (files.Count() == 0)
+                {
+                    Console.WriteLine("No ´.xls´ files found under {0}", currentDirectory + xlsDataFolder);
+                    return;
+                }
+                Console.Write("Using file(s): ");
+                foreach(var item in files)
+                {
+                    Console.Write(item + " ");
+                }
+                collection = files.SelectMany(currentFile => ReadExcelFileContent(currentFile));
+    
+            } else {
+                collection = ReadExcelFileContent(ExcelFile);
+            }
          
-            _collectionOfTrades = collection.OrderBy(a => a.Name).ToList();
+            _collectionOfTrades = collection.ToList();
         }
         
+        public IList<TradeInformation> GetTradeCollection()
+        {
+            return _collectionOfTrades;
+        }
+
         private IEnumerable<TradeInformation> ReadExcelFileContent(string fileName)
         {
             var collection = new List<TradeInformation>();

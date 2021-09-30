@@ -30,7 +30,8 @@ namespace ExcelToJsonExtractor
             Console.WriteLine(headerLine);
             Console.WriteLine(separatorLine);
 
-            var groupedList = trades.GroupBy(trade => trade.Name, item => item);
+            /* TODO: improve this for better performance */
+            var groupedList = trades.OrderBy(info => info.Name).GroupBy(trade => trade.Name, item => item);
             foreach (var item in groupedList)
             {
                 var contentCount = 0;
