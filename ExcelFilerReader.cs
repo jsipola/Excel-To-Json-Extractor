@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using ExcelDataReader;
 
-namespace main
+namespace ExcelToJsonExtractor
 {
     class ExcelFileReader
     {

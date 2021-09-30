@@ -7,7 +7,7 @@ using System.Text.Unicode;
 using System.Threading.Tasks;
 using CompanyInformationModels;
 
-namespace main
+namespace ExcelToJsonExtractor
 {
     class JsonDataWriter
     {

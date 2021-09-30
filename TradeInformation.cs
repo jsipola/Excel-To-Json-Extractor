@@ -1,4 +1,4 @@
-namespace main
+namespace ExcelToJsonExtractor
 {
     class TradeInformation
     {
