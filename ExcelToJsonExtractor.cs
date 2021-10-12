@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,13 @@ namespace ExcelToJsonExtractor
     {
         static async Task Main(string[] args)
         {
+            if (args.Count() == 0 || args[0].Contains("help"))
+            {
+                Console.WriteLine("\nNo file given\n");
+                Console.WriteLine("Usage: ExcelToJsonExtractor.exe some_excel_file.xls\n");
+                return;
+            }
+
             var excelFileReader = new ExcelFileReader();
             if (args.Count() == 1 && args[0].EndsWith(".xls")) 
             {
