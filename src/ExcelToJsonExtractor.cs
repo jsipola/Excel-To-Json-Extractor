@@ -25,6 +25,12 @@ namespace ExcelToJsonExtractor
             excelFileReader.Run();
             var trades = excelFileReader.GetTradeCollection();
 
+            if (trades.Count() == 0)
+            {
+                Console.WriteLine("No trades could be generated\n");
+                return;
+            }
+
             var dataWriter = new JsonDataWriter();
             await dataWriter.WriteDataToFile(trades);
             if (args.Count() > 0 && args.Contains("write"))
