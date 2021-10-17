@@ -9,7 +9,7 @@ using CompanyInformationModels;
 
 namespace ExcelToJsonExtractor
 {
-    class JsonDataWriter
+    public class JsonDataWriter
     {
         private static IFormatProvider cultureInfo => new System.Globalization.CultureInfo("fi-FI");
 
@@ -88,6 +88,7 @@ namespace ExcelToJsonExtractor
                 }
                 await File.WriteAllTextAsync(_fullPath + companyTradeData.Name + ".json",
                                              JsonSerializer.Serialize(companyTradeData, serializationOptions));
+                Console.WriteLine($"Data written to : /jsonData/{companyTradeData.Name}.json");
             }
         }
 
