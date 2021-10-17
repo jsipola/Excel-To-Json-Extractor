@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace ExcelToJsonExtractorTest
 {
-    public class Tests
+    public class ExcelFilerReaderTests
     {
 
         private ExcelFileReader _fileReader;
