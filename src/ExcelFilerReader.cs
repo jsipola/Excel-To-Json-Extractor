@@ -6,7 +6,7 @@ using ExcelDataReader;
 
 namespace ExcelToJsonExtractor
 {
-    class ExcelFileReader
+    public class ExcelFileReader
     {
 
         private static string xlsDataFolder => "/data/";
@@ -15,12 +15,20 @@ namespace ExcelToJsonExtractor
 
         public string ExcelFile { get; set;}
 
+        private string _currentDirectory;
+
         public ExcelFileReader()
         {
             // Required for ExcelReaderFactory
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             _collectionOfTrades = new List<TradeInformation>();
             ExcelFile = string.Empty;
+            
+            _currentDirectory = Directory.GetCurrentDirectory();
+            if (!Directory.Exists(_currentDirectory + xlsDataFolder))
+            {
+                Directory.CreateDirectory(_currentDirectory + xlsDataFolder);
+            }
         }
 
         public void Run()
@@ -31,11 +39,12 @@ namespace ExcelToJsonExtractor
             {
                 Console.WriteLine("No specified file found!");
                 Console.WriteLine("Searching under ´{0}´", xlsDataFolder);
-                var files = Directory.GetFiles(currentDirectory + xlsDataFolder).Where(filename => filename.EndsWith(".xls"));
+                var fullPath = _currentDirectory + xlsDataFolder;
+                var files = Directory.GetFiles(fullPath).Where(filename => filename.EndsWith(".xls"));
                 
                 if (files.Count() == 0)
                 {
-                    Console.WriteLine("No ´.xls´ files found under {0}", currentDirectory + xlsDataFolder);
+                    Console.WriteLine("No ´.xls´ files found under {0}", fullPath);
                     return;
                 }
                 Console.Write("Using file(s): ");

@@ -1,6 +1,6 @@
 namespace ExcelToJsonExtractor
 {
-    class TradeInformation
+    public class TradeInformation
     {
         public TradeInformation(string recordNumber,
                                 string typeOfAction,

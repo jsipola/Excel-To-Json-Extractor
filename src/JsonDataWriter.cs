@@ -9,15 +9,23 @@ using CompanyInformationModels;
 
 namespace ExcelToJsonExtractor
 {
-    class JsonDataWriter
+    public class JsonDataWriter
     {
         private static IFormatProvider cultureInfo => new System.Globalization.CultureInfo("fi-FI");
 
         public string CurrentDirectory { get; }
+        private string _fullPath { get; }
 
         public JsonDataWriter()
         {
             CurrentDirectory = Directory.GetCurrentDirectory();
+            _fullPath = CurrentDirectory + "/jsonData/";
+
+            if (!Directory.Exists(_fullPath))
+            {
+                Directory.CreateDirectory(_fullPath);
+            }
+
         }
 
         public async Task WriteDataToFile(IList<TradeInformation> trades)
@@ -78,8 +86,9 @@ namespace ExcelToJsonExtractor
                         companyTradeData.TotalDividendAmount += dividendAmount;
                     }
                 }
-                await File.WriteAllTextAsync(CurrentDirectory + "/jsonData/" + companyTradeData.Name + ".json",
+                await File.WriteAllTextAsync(_fullPath + companyTradeData.Name + ".json",
                                              JsonSerializer.Serialize(companyTradeData, serializationOptions));
+                Console.WriteLine($"Data written to : /jsonData/{companyTradeData.Name}.json");
             }
         }
 
